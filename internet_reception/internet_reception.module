@@ -80,7 +80,7 @@ function internet_reception_form_validate(&$form, &$form_state) {
   }
   //Age validation.
    $age_value = $form_state['values']['age'];
-  if ($age_value !== '' && (!is_numeric($age_value) || intval($age_value) != $age_value || $age_value <= MIN_AGE || $age_value >=MAX_AGE )) {
+  if (!is_numeric($age_value) || $age_value <= MIN_AGE || $age_value >=MAX_AGE) {
     form_set_error('age', t('Age must be a positive integer and less than ' . MAX_AGE . '.'));
   }
 }
