@@ -69,19 +69,19 @@ function internet_reception_form($form, &$form_state){
     '#type' => 'submit',
     '#value' => t('Submit'),
   );
-  return $form;
+  return $form ;
 }
 
 //Form validate.
 function internet_reception_form_validate(&$form, &$form_state) {
   //Email validation.
   if (!valid_email_address($form_state['values']['mail'])) {
-    form_set_error($form_state['values']['mail'], t('E-mail appears to be invalid.'));
+    form_set_error('mail', t('E-mail appears to be invalid.'));
   }
   //Age validation.
-   $value = $form_state['values']['age'];
-  if ($value !== '' && (!is_numeric($value) || intval($value) != $value || $value <= MIN_AGE || $value >=MAX_AGE )) {
-    form_set_error($value, t('Age must be a positive integer and less than ' . MAX_AGE . '.'));
+   $age_value = $form_state['values']['age'];
+  if ($age_value !== '' && (!is_numeric($age_value) || intval($age_value) != $age_value || $age_value <= MIN_AGE || $age_value >=MAX_AGE )) {
+    form_set_error('age', t('Age must be a positive integer and less than ' . MAX_AGE . '.'));
   }
 }
 
@@ -90,7 +90,7 @@ function internet_reception_main_function() {
   $form = drupal_get_form('internet_reception_form'); 
   // Rendering form.
   $form = drupal_render($form);
-  $form .= 'Fields with "*" is required.'; 
+  $form .= 'Fields with "*" is required.';
   return $form;
 }
 
